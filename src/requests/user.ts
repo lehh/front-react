@@ -24,8 +24,6 @@ export const logIn = (login: string, password: string): Promise<logInResult> => 
       .then((data) => {
         resolve(data as logInResult);
       })
-      .catch((errorMessage) => {
-        reject(errorMessage);
-      });
+      .catch((errorMessage: string) => reject(errorMessage));
   });
 };

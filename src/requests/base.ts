@@ -1,4 +1,4 @@
-type Body = { query: string; variables: Record<string, unknown> };
+type Body = { query: string; variables?: Record<string, unknown> };
 type ResponseData = {
   [key: string]: unknown
 }
