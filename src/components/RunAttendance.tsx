@@ -1,9 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Attendance } from '../types/attendance.type';
+import useAttendance from '../hooks/useAttendance';
+import { convertSecondsToTimeString } from '../utils/time.utils';
+import { numberToBRLString } from '../utils/currency.utils';
 
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import useAttendance from '../hooks/useAttendance';
 
 type RunAttendanceProps = {
   attendance: Attendance;
@@ -15,10 +17,7 @@ const RunAttendance = (props: RunAttendanceProps) => {
   const { state, finishAttendance } = useAttendance({ attendance: props.attendance });
   const [attendanceIsFinished, setAttendanceIsFinished] = useState(false);
 
-  const commission = state.commission.toLocaleString('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-  });
+  const commission = numberToBRLString(state.commission);
 
   useEffect(() => {
     state.timeLeft.totalSeconds === 0 ? endAttendance() : null;
@@ -51,7 +50,7 @@ const RunAttendance = (props: RunAttendanceProps) => {
         {attendanceIsFinished ? (
           <div>
             Commission: {commission} <br />
-            Duration: {state.duration} seconds
+            Duration: {convertSecondsToTimeString(state.duration)}
           </div>
         ) : null}
       </Modal.Body>

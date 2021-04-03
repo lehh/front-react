@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { getAllServices } from '../requests/service';
 import { Service } from '../types/service.type';
+import { convertSecondsToTimeString } from '../utils/time.utils';
 
 import Form from 'react-bootstrap/Form';
+import { numberToBRLString } from '../utils/currency.utils';
 
 type ServicesProps = {
   onSelectionChange(arg0: Service[]): void;
@@ -40,6 +42,7 @@ const ServiceSelection = (props: ServicesProps) => {
   return (
     <div>
       {services.map((service, index) => {
+        const price = numberToBRLString(service.price);
         return (
           <div key={index} className="p-4">
             <Form.Check
@@ -50,8 +53,8 @@ const ServiceSelection = (props: ServicesProps) => {
               label={`Service ${service.id}`}
               onChange={(event) => selectionChange(event)}
             />
-            <div>Price: R$ {service.price}</div>
-            <div>Time: {service.time}</div>
+            <div>Price: {price}</div>
+            <div>Time: {convertSecondsToTimeString(service.time)}</div>
           </div>
         );
       })}

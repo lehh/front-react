@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { updateAttendance } from '../requests/attendance';
 import { Attendance } from '../types/attendance.type';
 import { Service } from '../types/service.type';
