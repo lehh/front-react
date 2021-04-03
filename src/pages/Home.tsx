@@ -1,6 +1,8 @@
 import React from 'react';
 import useLoggedInUser from '../hooks/useLoggedInUser';
+
 import CreateAttendance from '../components/CreateAttendance';
+import ListAttendance from '../components/ListAttendance';
 
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
@@ -24,7 +26,7 @@ const Home = (props: HomeProps) => {
         </Button>
       </Row>
 
-      <div>Attendances:</div>
+      {!userIsClient ? <ListAttendance /> : null}
 
       {userIsClient ? <CreateAttendance /> : null}
     </Container>
