@@ -42,8 +42,6 @@ const calculateTotalTime = (services: Service[]): number => {
 const calculateComission = (services: Service[]): number => {
   const percentage = services.reduce((prev, service) => prev + service.commission, 0);
   const totalPrice = services.reduce((prev, service) => prev + service.price, 0);
-  console.log(totalPrice);
-  console.log(percentage);
 
   return (percentage / 100) * totalPrice;
 };

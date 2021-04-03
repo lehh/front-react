@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getAllServices } from '../requests/service';
 import { Service } from '../types/service.type';
-import { convertSecondsToTimeString } from '../utils/time.utils';
+import { secondsToTimeString } from '../utils/time.utils';
 
 import Form from 'react-bootstrap/Form';
 import { numberToBRLString } from '../utils/currency.utils';
@@ -28,14 +28,15 @@ const ServiceSelection = (props: ServicesProps) => {
 
   const selectionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const isChecked = event.target.checked;
-    const index = parseInt(event.target.value);
+    const id = parseInt(event.target.value);
 
     if (isChecked === true) {
-      setSelectedServices((prevState) => [...prevState, services[index]]);
+      const selectedService = services.find((service) => service.id === id);
+      setSelectedServices((prevState) => [...prevState, selectedService]);
       return;
     }
 
-    const servicesFiltered = selectedServices.filter((id, i) => i !== index);
+    const servicesFiltered = selectedServices.filter((service, i) => service.id !== id);
     setSelectedServices(servicesFiltered);
   };
 
@@ -49,12 +50,12 @@ const ServiceSelection = (props: ServicesProps) => {
               inline
               id={`service-${service.id}`}
               type="checkbox"
-              value={index}
+              value={service.id}
               label={`Service ${service.id}`}
               onChange={(event) => selectionChange(event)}
             />
             <div>Price: {price}</div>
-            <div>Time: {convertSecondsToTimeString(service.time)}</div>
+            <div>Time: {secondsToTimeString(service.time)}</div>
           </div>
         );
       })}

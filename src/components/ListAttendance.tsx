@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Attendance } from '../types/attendance.type';
 import { getAllAttendances } from '../requests/attendance';
-import { convertSecondsToTimeString } from '../utils/time.utils';
+import { secondsToTimeString } from '../utils/time.utils';
 import { numberToBRLString } from '../utils/currency.utils';
 
 import Table from 'react-bootstrap/Table';
@@ -54,7 +54,7 @@ const ListAttendance = () => {
               <tr key={index}>
                 <td>{attendance.id}</td>
                 <td>{attendance.finished ? 'Finished' : 'Not Started'}</td>
-                <td>{attendance.duration ? `${convertSecondsToTimeString(attendance.duration)}`: '-'}</td>
+                <td>{attendance.duration ? `${secondsToTimeString(attendance.duration)}`: '-'}</td>
                 <td>
                   {attendance.services.map((service, index) => {
                     const price = numberToBRLString(service.price);

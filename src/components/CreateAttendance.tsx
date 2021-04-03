@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ServiceSelection from './ServiceSelection';
 import { Service } from '../types/service.type';
 import { createAttendance } from '../requests/attendance';
+import { numberToBRLString } from '../utils/currency.utils';
 
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
@@ -49,7 +50,7 @@ const CreateAttendance = () => {
           <ServiceSelection onSelectionChange={serviceSelectionChange} />
         </div>
 
-        <div>Total: R$ {finalPrice}</div>
+        <div>Total: {numberToBRLString(finalPrice)}</div>
 
         <Button onClick={createNewAttendance}>Create</Button>
       </Card.Body>
