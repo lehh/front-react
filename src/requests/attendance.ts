@@ -33,25 +33,22 @@ const createAttendanceMutation = () => {
 const updateAttendanceMutation = () => {
   return `
   mutation ($id: Int!, $finished: Boolean!, $duration: Float){
-    updateAttendance(AttendanceInput: {id: $id, finished: $finished, duration: $duration}){
-      id
-      finished
-      duration
-      services
-    }
+    updateAttendance(AttendanceInput: {id: $id, finished: $finished, duration: $duration})
   }`;
 };
 
 export const getAllAttendances = (): Promise<Attendance[]> => {
   return new Promise((resolve, reject) => {
     const body = {
-      query: getAllAttendancesQuery()
-    }
+      query: getAllAttendancesQuery(),
+    };
 
-    sendRequest(body).then((data) => {
-      resolve(data.getAllAttendances as Attendance[])
-    }).catch((errorMessage: string) => reject(errorMessage))
-  })
+    sendRequest(body)
+      .then((data) => {
+        resolve(data.getAllAttendances as Attendance[]);
+      })
+      .catch((errorMessage: string) => reject(errorMessage));
+  });
 };
 
 export const createAttendance = (servicesIds: number[]): Promise<Attendance> => {
@@ -71,7 +68,7 @@ export const createAttendance = (servicesIds: number[]): Promise<Attendance> => 
   });
 };
 
-export const updateAttendance = (attendance: Attendance): Promise<Attendance> => {
+export const updateAttendance = (attendance: Attendance): Promise<number> => {
   return new Promise((resolve, reject) => {
     const { id, duration, finished } = attendance;
 
@@ -86,7 +83,7 @@ export const updateAttendance = (attendance: Attendance): Promise<Attendance> =>
 
     sendRequest(body)
       .then((data) => {
-        resolve(data.updateAttendance as Attendance);
+        resolve(data.updateAttendance as number);
       })
       .catch((errorMessage: string) => reject(errorMessage));
   });
