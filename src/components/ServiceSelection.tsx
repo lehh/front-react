@@ -36,7 +36,7 @@ const ServiceSelection = (props: ServicesProps) => {
       return;
     }
 
-    const servicesFiltered = selectedServices.filter((service, i) => service.id !== id);
+    const servicesFiltered = selectedServices.filter((service) => service.id !== id);
     setSelectedServices(servicesFiltered);
   };
 
