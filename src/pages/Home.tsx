@@ -1,9 +1,10 @@
 import React from 'react';
+import useLoggedInUser from '../hooks/useLoggedInUser';
+import CreateAttendance from '../components/CreateAttendance';
 
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
-import useLoggedInUser from '../hooks/useLoggedInUser';
 
 type HomeProps = {
   onLogOut(): void;
@@ -16,12 +17,16 @@ const Home = (props: HomeProps) => {
 
   return (
     <Container>
-      <Row>Hello { user?.toUpperCase() }</Row>
+      <Row>Hello {user?.toUpperCase()}</Row>
       <Row>
         <Button variant="danger" id="log-out" onClick={props.onLogOut}>
           Log Out
         </Button>
       </Row>
+
+      <div>Attendances:</div>
+
+      {userIsClient ? <CreateAttendance /> : null}
     </Container>
   );
 };

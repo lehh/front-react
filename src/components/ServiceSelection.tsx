@@ -22,7 +22,7 @@ const ServiceSelection = (props: ServicesProps) => {
 
   useEffect(() => {
     onSelectionChange(selectedServices);
-  }, [selectedServices])
+  }, [selectedServices]);
 
   const selectionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const isChecked = event.target.checked;
